@@ -1,4 +1,4 @@
-gueltige_nukleotide = ['A', 'T', 'G', 'C']
+gueltige_nukleotide = ['A', 'T', 'G', 'C', 'a', 't', 'g', 'c']
 
 # Molekulargewichte in mg/mol
 # Nukleotidmonophosphate ohne 3'-OH-Gruppe
@@ -16,20 +16,18 @@ def hole_dna_sequenz():
     Um gültig zu sein, darf die Sequenz nur aus den Buchstaben
     A, G, T, C, a, g, t, c bestehen.
     """
-
     # Hinweis: Verwende eine while-Schleife, innerhalb derer Du eine
     # Sequenz vom Nutzer erfragst und die Eingabe validierst.
     # Nur wenn die Validierung klappt, brichst Du die Schleife ab
     # und lieferst die Sequenz zurück.
     while True:
         sequence = input('Gib eine DNA-Sequenz ein: ')
-        
-        # Hier fehlt natürlich noch die Validierung.
-        # Dafür brauchst Du noch eine Schleife, in der jeder Buchstabe
-        # der Eingabe auf Gültigkeit geprüft werden muss.
-        # Für einen Anfänger ist das schon eine ordentlich harte Nuss,
-        # die aber mit etwas Anstrengung zu knacken sein sollte.
-
+        for nucleotid in sequence:
+            if nucleotid in gueltige_nukleotide:
+                erfolgreiche_validierung = True
+            else:
+                erfolgreiche_validierung = False
+                
         if erfolgreiche_validierung:
             break
         else:
@@ -47,8 +45,30 @@ def hole_dna_sequenz():
 
 
 seq = hole_dna_sequenz()
-# Hier sollten jetzt die nötigen Berechnungen durchgeführt werden.
 
-# Und hier erfolgt dann die Ausgabe.
+Anzahl_G = seq.count('G') + seq.count('g')
+Anzahl_A = seq.count('A') + seq.count('a')
+Anzahl_T = seq.count('T') + seq.count('t')
+Anzahl_C = seq.count('C') + seq.count('c')
+
 print()
-print('Eingelesene Sequenz:')
+print('Eingelesene Sequenz:', seq)
+print()
+print('Länge:', len(seq))
+print()
+print('Base', '   ', 'Häufigkeit')
+print('G', '      ', Anzahl_G)
+print('A', '      ', Anzahl_A)
+print('T', '      ', Anzahl_T)
+print('C', '      ', Anzahl_C)
+print()
+
+GC_Gehalt = (100*(Anzahl_G + Anzahl_C)/(Anzahl_G + Anzahl_A + Anzahl_T + Anzahl_C))
+
+print('% GC-Gehalt:', GC_Gehalt,)
+print()
+Molgewicht = 0.001*(Anzahl_G * mw_g + Anzahl_A * mw_a + Anzahl_T * mw_t + Anzahl_C * mw_c + mw_oh)
+
+print('Molekulargewicht:', Molgewicht, 'g/mol')
+
+
