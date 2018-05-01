@@ -30,7 +30,7 @@ def hole_dna_sequenz():
         # Für einen Anfänger ist das schon eine ordentlich harte Nuss,
         # die aber mit etwas Anstrengung zu knacken sein sollte.
 
-        if erfolgreiche_validierung:
+        if sequence in gueltige_nukleotide:
             break
         else:
             # Dieser Teil wird ausgeführt wenn die Bedingung hinter if
@@ -46,9 +46,23 @@ def hole_dna_sequenz():
     return sequence
 
 
+sequence = input('Gib eine DNA-Sequenz ein: ')
 seq = hole_dna_sequenz()
 # Hier sollten jetzt die nötigen Berechnungen durchgeführt werden.
 
 # Und hier erfolgt dann die Ausgabe.
 print()
-print('Eingelesene Sequenz:')
+print('Eingelesene Sequenz:', sequence)
+print('Länge:', len(sequence))
+
+print('Base', '    ', 'Häufigkeit')
+print('G', '    ', sequence.count('G'))
+print('A', '    ', sequence.count('A'))
+print('T', '    ', sequence.count('T'))
+print('C', '    ', sequence.count('C'))
+
+GC-Gehalt= (100*(sequence.count('G')+ sequence.count('C'))/(sequence.count('G')+sequence.count('C')+ sequence.count('A')+sequence.count('T')))
+print('% GC-Gehalt:', GC-Gehalt, '%')
+
+Molgewicht = (sequence.count('G')*mw_g + sequence.count('A')* mw_a + sequence.count('T')* mw_t + sequence.count('C')*mw_c )
+print('Molgewicht:', Molgewicht, 'g/mol')
