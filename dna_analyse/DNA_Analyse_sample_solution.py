@@ -85,6 +85,26 @@ if __name__ == '__main__':
     # Molekulargewicht
     mw_gesamt = n_g*mw_g + n_a*mw_a + n_t*mw_t + n_c*mw_c + mw_oh  # in mg/mol
 
+    #Komplementaerstrang
+    comp_bases = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
+    comp_dna = []
+    for b in seq.upper():
+        if b == 'A':
+            comp_dna.append(comp_bases['A'])
+        if b == 'T':
+            comp_dna.append(comp_bases['T'])
+        if b == 'G':
+            comp_dna.append(comp_bases['G'])
+        if b == 'C':
+            comp_dna.append(comp_bases['C'])
+
+    compdna_string = ''.join(comp_dna)
+
+    #Reversekomplementaerstrang
+    string_length = len(compdna_string)
+    reversed_string = compdna_string[-1:-(string_length + 1):-1]
+
+
     # Ausgabe
     # -------
     print()
@@ -101,3 +121,5 @@ if __name__ == '__main__':
     print('% GC-Gehalt:', gc_gehalt)
     print()
     print('Molekulargewicht:', mw_gesamt/1000, 'g/mol')
+    print('Die Komplementaersequenz lautet:', compdna_string)
+    print('Die reverse Komplementaersequenz lautet:', reversed_string)
