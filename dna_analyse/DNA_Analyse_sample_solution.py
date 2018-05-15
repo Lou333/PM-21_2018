@@ -2,12 +2,9 @@ gueltige_nukleotide = ['A', 'T', 'G', 'C']
 
 # Molekulargewichte in mg/mol
 # Nukleotidmonophosphate ohne 3'-OH-Gruppe
-mw_a = 313210
-mw_t = 304200
-mw_g = 329210
-mw_c = 289180
 # freie OH-Gruppe am 3'-Ende eines DNA-Fragments
-mw_oh = 17010
+mol_gewicht = {'a': 313210, 't': 304200, 'g': 329210, 'c': 289180, 'oh': 17010}
+
 
 
 def ist_valide_sequenz(seq, alphabet, match_case=False):
@@ -83,7 +80,27 @@ if __name__ == '__main__':
     # GC-Gehalt
     gc_gehalt = 100 * (n_g+n_c) / seqlen
     # Molekulargewicht
-    mw_gesamt = n_g*mw_g + n_a*mw_a + n_t*mw_t + n_c*mw_c + mw_oh  # in mg/mol
+    mw_gesamt = n_g * mol_gewicht['g'] + n_a * mol_gewicht['a'] + n_t * mol_gewicht['t'] + n_c*mol_gewicht['c'] + mol_gewicht['oh']  # in mg/mol
+
+    #Komplementaerstrang
+    comp_bases = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
+    comp_dna = []
+    for b in seq.upper():
+        if b == 'A':
+            comp_dna.append(comp_bases['A'])
+        if b == 'T':
+            comp_dna.append(comp_bases['T'])
+        if b == 'G':
+            comp_dna.append(comp_bases['G'])
+        if b == 'C':
+            comp_dna.append(comp_bases['C'])
+
+    compdna_string = ''.join(comp_dna)
+
+    #Reversekomplementaerstrang
+    string_length = len(compdna_string)
+    reversed_string = compdna_string[-1:-(string_length + 1):-1]
+
 
     # Ausgabe
     # -------
@@ -101,3 +118,5 @@ if __name__ == '__main__':
     print('% GC-Gehalt:', gc_gehalt)
     print()
     print('Molekulargewicht:', mw_gesamt/1000, 'g/mol')
+    print('Die Komplementaersequenz lautet:', compdna_string)
+    print('Die reverse Komplementaersequenz lautet:', reversed_string)
