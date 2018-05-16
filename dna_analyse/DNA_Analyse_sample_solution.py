@@ -86,14 +86,7 @@ if __name__ == '__main__':
     comp_bases = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
     comp_dna = []
     for b in seq.upper():
-        if b == 'A':
-            comp_dna.append(comp_bases['A'])
-        if b == 'T':
-            comp_dna.append(comp_bases['T'])
-        if b == 'G':
-            comp_dna.append(comp_bases['G'])
-        if b == 'C':
-            comp_dna.append(comp_bases['C'])
+            comp_dna.append(comp_bases[b])
 
     compdna_string = ''.join(comp_dna)
 
